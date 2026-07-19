@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Canción</title>
+  <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+  <div class="contenedor">
+    <h1 th:text="${cancion.id != null ? 'Editar Canción' : 'Nueva Canción'}"></h1>
+    <p class="subtitulo" th:text="${appNombre}"></p>
+
+    <div class="tarjeta-form">
+      <form th:action="@{/canciones/guardar}" th:object="${cancion}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="campo">
+          <label>Título</label>
+          <input type="text" th:field="*{titulo}" placeholder="Ej: Bohemian Rhapsody"/>
+        </div>
+
+        <div class="campo">
+          <label>Género</label>
+          <input type="text" th:field="*{genero}" placeholder="Ej: Rock, Pop, Jazz"/>
+        </div>
+
+        <div class="campo">
+          <label>Año</label>
+          <input type="number" th:field="*{anio}" placeholder="Ej: 1975"/>
+        </div>
+
+        <div class="campo">
+          <label>Artista — <a th:href="@{/artistas}" style="font-size:0.8rem;color:var(--accent-2);">+ Gestionar artistas</a></label>
+          <select name="artistaId">
+            <option value="">— Selecciona —</option>
+            <option th:each="a : ${artistas}"
+                    th:value="${a.id}"
+                    th:text="${a.nombre}"
+                    th:selected="${cancion.artista != null and cancion.artista.id == a.id}">
+            </option>
+          </select>
+        </div>
+
+        <button type="submit">Guardar</button>
+      </form>
+    </div>
+
+    <a class="volver" th:href="@{/canciones}">← Cancelar</a>
+  </div>
+</body>
+</html>

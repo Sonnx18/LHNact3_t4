@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Detalle</title>
+  <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+  <div class="contenedor">
+    <h1 th:text="${cancion.titulo}"></h1>
+    <p class="subtitulo" th:text="${appNombre}"></p>
+
+    <div class="tarjeta confirmacion">
+      <p><span class="etiqueta">ID</span><br/><span th:text="${cancion.id}"></span></p>
+      <p><span class="etiqueta">Género</span><br/><span th:text="${cancion.genero}"></span></p>
+      <p><span class="etiqueta">Año</span><br/><span th:text="${cancion.anio}"></span></p>
+      <p><span class="etiqueta">Artista</span><br/><span th:text="${cancion.artista != null ? cancion.artista.nombre : '—'}"></span></p>
+    </div>
+
+    <div class="barra" style="margin-top:1.5rem;">
+      <a class="boton" th:href="@{/canciones/editar/{id}(id=${cancion.id})}">Editar</a>
+      <a class="volver" th:href="@{/canciones}" style="margin-top:0;">← Lista</a>
+    </div>
+  </div>
+</body>
+</html>

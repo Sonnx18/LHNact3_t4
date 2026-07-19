@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Artistas</title>
+  <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Artistas</h1>
+    <p class="subtitulo" th:text="${appNombre}"></p>
+
+    <div class="tarjeta-form" style="margin-bottom:2rem;">
+      <form class="campo" th:action="@{/artistas/guardar}" th:object="${nuevo}" method="post">
+        <div class="campo">
+          <label>Nombre del artista</label>
+          <input type="text" th:field="*{nombre}" placeholder="Ej: Post Malone" required/>
+        </div>
+        <div class="campo">
+          <label>País</label>
+          <input type="text" th:field="*{pais}" placeholder="Ej: EUA"/>
+        </div>
+        <button type="submit">Agregar artista</button>
+      </form>
+    </div>
+
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>País</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="a : ${artistas}">
+          <td th:text="${a.nombre}"></td>
+          <td th:text="${a.pais != null ? a.pais : '—'}"></td>
+          <td>
+            <a class="del" th:href="@{/artistas/eliminar/{id}(id=${a.id})}"
+               onclick="return confirm('¿Eliminar artista?')">Eliminar</a>
+          </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(artistas)}">
+          <td colspan="3" style="color:var(--muted);text-align:center;padding:1rem;">Sin artistas registrados</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <a class="volver" th:href="@{/canciones/nueva}">← Volver al formulario</a>
+  </div>
+</body>
+</html>

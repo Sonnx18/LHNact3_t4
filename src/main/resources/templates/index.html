@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Catálogo Musical</title>
+  <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+  <div class="contenedor">
+    <h1>Catálogo Musical</h1>
+    <p class="subtitulo" th:text="${appNombre + ' — ' + appAutor}"></p>
+
+    <div class="barra">
+      <a class="boton" th:href="@{/canciones}">Ver canciones</a>
+      <a class="boton" th:href="@{/canciones/nueva}">+ Nueva canción</a>
+      <a class="boton" th:href="@{/artistas}">Gestionar artistas</a>
+    </div>
+  </div>
+</body>
+</html>
